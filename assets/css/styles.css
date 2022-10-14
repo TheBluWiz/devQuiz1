@@ -1,0 +1,18 @@
+* {
+  font-size: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+a p{
+  margin-top: .5rem;
+  margin-left: .5rem;
+}
+
+#time-remaining {
+  margin-top: .5rem;
+  margin-right: .5rem;
+}
