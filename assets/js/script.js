@@ -5,7 +5,7 @@ var timeRemainingEl = document.querySelector("#time-remaining");
 timeRemainingEl.textContent = timeRemaining;
 
 var startButtonEl = document.querySelector("#start-button");
-var buttonsEl = document.querySelectorAll("#buttons");
+var buttonsEl = document.querySelector("#buttons");
 var questionEl = document.querySelector("#question");
 
 // Seeds Questions and answers for website
@@ -60,6 +60,7 @@ startButtonEl.addEventListener("click", function () {
   createButtons();
   currentQuestion++;
 });
+
 
 
 //how to set var in place of question1
