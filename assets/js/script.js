@@ -5,7 +5,7 @@ var timeRemainingEl = document.querySelector("#time-remaining");
 timeRemainingEl.textContent = timeRemaining;
 
 var startButtonEl = document.querySelector("#start-button");
-var buttonsEl = document.querySelectorAll(".buttons");
+var buttonsEl = document.querySelectorAll("#buttons");
 var questionEl = document.querySelector("#question");
 
 // Seeds Questions and answers for website
@@ -36,12 +36,29 @@ for (let i = questionsArray.length - 1; i > 0; i--) {
 
 function removeButtons() {
   for (let i = 0; i < buttonsEl.length; i++) {
-    buttonsEl[i].remove()
+    buttonsEl[i].remove();
+  }
+  buttonsEl = document.querySelectorAll("#buttons");
+}
+
+function assignQuestion() {
+  questionEl.textContent = questionsArray[currentQuestion].question;
+}
+
+function createButtons() {
+  for (let i = 0; i < questionsArray[i].answers.length; i++) {
+    var buttonArray = document.createElement("button");
+    buttonArray.textContent = questionsArray[currentQuestion].answers[i]
+    buttonsEl.appendChild(buttonArray);
   }
 }
 
+console.log(questionsArray[0].answers)
 startButtonEl.addEventListener("click", function () {
   removeButtons();
+  assignQuestion();
+  createButtons();
+  currentQuestion++;
 });
 
 
