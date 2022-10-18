@@ -1,3 +1,4 @@
+// State Variables
 var timeRemaining = 0;
 var currentQuestion = 0;
 var userAnswer = "";
@@ -5,6 +6,7 @@ var quizStarted = false;
 var score = 0;
 var userName = "";
 
+// UI Hooks
 var timeRemainingEl = document.querySelector("#time-remaining");
 timeRemainingEl.textContent = timeRemaining;
 
@@ -32,16 +34,15 @@ const questionsArray = [
     correctAnswer: "all of these"
   },
 ]
+
 // Fischer-Yates shuffle sourced at:
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function scrambleQuestions() {
-  for (let i = questionsArray.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
-  }
+for (let i = questionsArray.length - 1; i > 0; i--) {
+  var j = Math.floor(Math.random() * (i + 1));
+  [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
 }
-scrambleQuestions();
 
+// sets UI to current question
 function assignQuestion() {
   questionEl.textContent = questionsArray[currentQuestion].question;
 }
@@ -115,12 +116,12 @@ timerInterval = setInterval(function () {
       }
       body.setAttribute("styles", "display: flex; flex-direction: column; align-items: flex-start");
       body.innerHTML = '<h1>All Done!</h1>' +
-      '<p>Your final score is ' + score + '.</p>' +
-      '<form>' +
+        '<p>Your final score is ' + score + '.</p>' +
+        '<form>' +
         '<label for="initials">Enter initials: </label>' +
         '<input type="text" id="initials">' +
         '<input type="submit" value="submit" id="submit">' +
-     '</form>';
+        '</form>';
       quizStarted = false;
     }
   }
