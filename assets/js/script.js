@@ -1,5 +1,6 @@
 var timeRemaining = 0;
 var currentQuestion = 0;
+var userAnswer = "";
 
 var timeRemainingEl = document.querySelector("#time-remaining");
 timeRemainingEl.textContent = timeRemaining;
@@ -7,6 +8,9 @@ timeRemainingEl.textContent = timeRemaining;
 var startButtonEl = document.querySelector("#start-button");
 var buttonsEl = document.querySelector("#buttons");
 var questionEl = document.querySelector("#question");
+
+console.log(buttonsEl);
+
 
 // Seeds Questions and answers for website
 const questionsArray = [
@@ -27,35 +31,28 @@ const questionsArray = [
   },
 ]
 
-//Fisher-Yates Array sort implementation. Sourced from:
-// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array//Fisher-Yates Array sort implementation. Sourced from:
+// 
 for (let i = questionsArray.length - 1; i > 0; i--) {
   var j = Math.floor(Math.random() * (i + 1));
   [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
-}
-
-function removeButtons() {
-  for (let i = 0; i < buttonsEl.length; i++) {
-    buttonsEl[i].remove();
-  }
-  buttonsEl = document.querySelectorAll("#buttons");
 }
 
 function assignQuestion() {
   questionEl.textContent = questionsArray[currentQuestion].question;
 }
 
+//work on this next
 function createButtons() {
-  for (let i = 0; i < questionsArray[i].answers.length; i++) {
-    var buttonArray = document.createElement("button");
-    buttonArray.textContent = questionsArray[currentQuestion].answers[i]
-    buttonsEl.appendChild(buttonArray);
-  }
+  var i = 0
+  buttonsEl.forEach(element => {
+    element.innerHTML = questionsArray[currentQuestion].answers[i]
+  });
 }
 
-console.log(questionsArray[0].answers)
 startButtonEl.addEventListener("click", function () {
-  removeButtons();
+  startButtonEl.setAttribute("style", "display:none");
+
   assignQuestion();
   createButtons();
   currentQuestion++;
