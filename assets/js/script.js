@@ -31,8 +31,8 @@ const questionsArray = [
   },
 ]
 
-https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array//Fisher-Yates Array sort implementation. Sourced from:
-// 
+-//Fisher-Yates Array sort implementation. Sourced from:
+-// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 for (let i = questionsArray.length - 1; i > 0; i--) {
   var j = Math.floor(Math.random() * (i + 1));
   [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
