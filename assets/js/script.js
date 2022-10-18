@@ -12,6 +12,7 @@ var startButtonEl = document.querySelector("#start-button");
 var buttonsEl = document.querySelector("#buttons");
 var questionEl = document.querySelector("#question");
 var isCorrect = document.querySelector("#is-correct");
+var body = document.querySelector("#test")
 
 // Seeds Questions and answers for website
 const questionsArray = [
@@ -85,19 +86,6 @@ function updateResult() {
   }
 }
 
-// function toggleTest() {
-//   if (startButtonEl.getAttribute("style") === "display:inline-block") {
-//     startButtonEl.setAttribute("style", "display:none");
-//   } else {
-//     startButtonEl.setAttribute("style", "display:inline-block");
-//   }
-//   if (buttonsEl.getAttribute("style") === "display:none") {
-//     buttonsEl.setAttribute("style", "display:flex");
-//   } else {
-//     buttonsEl.setAttribute("style", "display:none");
-//   }
-// }
-
 startButtonEl.addEventListener("click", function () {
   startButtonEl.setAttribute("style", "display:none");
   assignQuestion();
@@ -116,26 +104,26 @@ buttonsEl.addEventListener("click", function (event) {
   nextQuestion();
 });
 
-console.log(currentQuestion)
-console.log (questionsArray.length)
-console.log(currentQuestion < questionsArray.length)
 timerInterval = setInterval(function () {
   if (quizStarted) {
-    console.log(timeRemaining)
-    console.log(timeRemaining > 0) 
     if (timeRemaining > 0 && currentQuestion < questionsArray.length) {
       timeRemaining--;
       timeRemainingEl.textContent = timeRemaining;
     } else {
-      deleteButtons();
-      questionEl.textContent = "";
-      isCorrect.setAttribute("style", "display:none")
-      alert("Game Over");
-      userName = prompt("What is your name?");
+      while (body.firstChild) {
+        body.removeChild(body.firstChild);
+      }
+      body.setAttribute("styles", "display: flex; flex-direction: column; align-items: flex-start");
+      body.innerHTML = '<h1>All Done!</h1>' +
+      '<p>Your final score is ' + score + '.</p>' +
+      '<form>' +
+        '<label for="initials">Enter initials: </label>' +
+        '<input type="text" id="initials">' +
+        '<input type="submit" value="submit" id="submit">' +
+     '</form>';
       quizStarted = false;
     }
   }
 }, 1000);
-//alert Game Over
-//prompt What is your name?
+
 //add score to Highscore list

@@ -43,3 +43,9 @@ header p {
 #buttons {
   display: none;
 }
+
+#submit {
+  margin: 1rem;
+  background-color: blueviolet;
+  color: white;
+}
