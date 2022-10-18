@@ -30,9 +30,8 @@ const questionsArray = [
     correctAnswer: "all of these"
   },
 ]
-
--//Fisher-Yates Array sort implementation. Sourced from:
--// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// Fischer-Yates shuffle sourced at:
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 for (let i = questionsArray.length - 1; i > 0; i--) {
   var j = Math.floor(Math.random() * (i + 1));
   [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
