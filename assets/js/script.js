@@ -9,9 +9,6 @@ var startButtonEl = document.querySelector("#start-button");
 var buttonsEl = document.querySelector("#buttons");
 var questionEl = document.querySelector("#question");
 
-console.log(buttonsEl);
-
-
 // Seeds Questions and answers for website
 const questionsArray = [
   {
@@ -32,10 +29,13 @@ const questionsArray = [
 ]
 // Fischer-Yates shuffle sourced at:
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-for (let i = questionsArray.length - 1; i > 0; i--) {
-  var j = Math.floor(Math.random() * (i + 1));
-  [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
+function scrambleQuestions() {
+  for (let i = questionsArray.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
+  }
 }
+scrambleQuestions();
 
 function assignQuestion() {
   questionEl.textContent = questionsArray[currentQuestion].question;
@@ -51,7 +51,27 @@ function createButtons() {
 
 function deleteButtons() {
   while (buttonsEl.firstChild) {
-    buttonsEl.removeChild(element.firstChild);
+    buttonsEl.removeChild(buttonsEl.firstChild);
+  }
+}
+
+function nextQuestion() {
+  assignQuestion();
+  deleteButtons();
+  createButtons();
+  currentQuestion++;
+}
+
+function toggleTest() {
+  if (startButtonEl.getAttribute("style") === "display:inline-block") {
+    startButtonEl.setAttribute("style", "display:none");
+  } else {
+    startButtonEl.setAttribute("style", "display:inline-block");
+  }
+  if (buttonsEl.getAttribute("style") === "display:none") {
+    buttonsEl.setAttribute("style", "display:flex");
+  } else {
+    buttonsEl.setAttribute("style", "display:none");
   }
 }
 
@@ -59,11 +79,13 @@ startButtonEl.addEventListener("click", function () {
   startButtonEl.setAttribute("style", "display:none");
   assignQuestion();
   createButtons();
-  buttonsEl.setAttribute("style", "display: flex")
+  buttonsEl.setAttribute("style", "display:flex");
   currentQuestion++;
+  timeRemaining = 90;
+  timeRemainingEl.textContent = timeRemaining;
 });
 
-
+//display:none
 
 //how to set var in place of question1
 // console.log(questions.question1.correctAnswer)
