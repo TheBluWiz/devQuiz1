@@ -1,6 +1,8 @@
 var timeRemaining = 0;
 var currentQuestion = 0;
 var userAnswer = "";
+var quizStarted = false;
+var score = 0;
 
 var timeRemainingEl = document.querySelector("#time-remaining");
 timeRemainingEl.textContent = timeRemaining;
@@ -8,6 +10,7 @@ timeRemainingEl.textContent = timeRemaining;
 var startButtonEl = document.querySelector("#start-button");
 var buttonsEl = document.querySelector("#buttons");
 var questionEl = document.querySelector("#question");
+var isCorrect = document.querySelector("#is-correct");
 
 // Seeds Questions and answers for website
 const questionsArray = [
@@ -62,27 +65,53 @@ function nextQuestion() {
   currentQuestion++;
 }
 
-function toggleTest() {
-  if (startButtonEl.getAttribute("style") === "display:inline-block") {
-    startButtonEl.setAttribute("style", "display:none");
+function answerIsCorrect() {
+  if (userAnswer === questionsArray[currentQuestion].correctAnswer) {
+    userAnswer = true;
   } else {
-    startButtonEl.setAttribute("style", "display:inline-block");
-  }
-  if (buttonsEl.getAttribute("style") === "display:none") {
-    buttonsEl.setAttribute("style", "display:flex");
-  } else {
-    buttonsEl.setAttribute("style", "display:none");
+    userAnswer = false;
   }
 }
+
+function updateResult() {
+  if (userAnswer === true) {
+    isCorrect.textContent = "Correct!";
+    score++;
+  } else {
+    isCorrect.textContent = "Incorrect!";
+    timeRemaining -= 10;
+    timeRemainingEl.textContent = timeRemaining;
+  }
+}
+
+// function toggleTest() {
+//   if (startButtonEl.getAttribute("style") === "display:inline-block") {
+//     startButtonEl.setAttribute("style", "display:none");
+//   } else {
+//     startButtonEl.setAttribute("style", "display:inline-block");
+//   }
+//   if (buttonsEl.getAttribute("style") === "display:none") {
+//     buttonsEl.setAttribute("style", "display:flex");
+//   } else {
+//     buttonsEl.setAttribute("style", "display:none");
+//   }
+// }
 
 startButtonEl.addEventListener("click", function () {
   startButtonEl.setAttribute("style", "display:none");
   assignQuestion();
   createButtons();
   buttonsEl.setAttribute("style", "display:flex");
-  currentQuestion++;
   timeRemaining = 90;
   timeRemainingEl.textContent = timeRemaining;
+  quizStarted = true;
+});
+
+buttonsEl.addEventListener("click", function (event) {
+  event.stopPropagation();
+  userAnswer = event.target.textContent
+  answerIsCorrect();
+  updateResult();
 });
 
 //display:none
