@@ -41,19 +41,25 @@ function assignQuestion() {
   questionEl.textContent = questionsArray[currentQuestion].question;
 }
 
-//work on this next
 function createButtons() {
-  var i = 0
-  buttonsEl.forEach(element => {
-    element.innerHTML = questionsArray[currentQuestion].answers[i]
-  });
+  for (let i = 0; i < questionsArray[currentQuestion].answers.length; i++) {
+    var buttonArray = document.createElement("button");
+    buttonArray.textContent = questionsArray[currentQuestion].answers[i]
+    buttonsEl.appendChild(buttonArray);
+  }
+}
+
+function deleteButtons() {
+  while (buttonsEl.firstChild) {
+    buttonsEl.removeChild(element.firstChild);
+  }
 }
 
 startButtonEl.addEventListener("click", function () {
   startButtonEl.setAttribute("style", "display:none");
-
   assignQuestion();
   createButtons();
+  buttonsEl.setAttribute("style", "display: flex")
   currentQuestion++;
 });
 
