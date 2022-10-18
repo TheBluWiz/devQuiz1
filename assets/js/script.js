@@ -3,6 +3,7 @@ var currentQuestion = 0;
 var userAnswer = "";
 var quizStarted = false;
 var score = 0;
+var userName = "";
 
 var timeRemainingEl = document.querySelector("#time-remaining");
 timeRemainingEl.textContent = timeRemaining;
@@ -59,10 +60,10 @@ function deleteButtons() {
 }
 
 function nextQuestion() {
+  currentQuestion++;
   assignQuestion();
   deleteButtons();
   createButtons();
-  currentQuestion++;
 }
 
 function answerIsCorrect() {
@@ -112,30 +113,29 @@ buttonsEl.addEventListener("click", function (event) {
   userAnswer = event.target.textContent
   answerIsCorrect();
   updateResult();
+  nextQuestion();
 });
 
-//display:none
-
-//how to set var in place of question1
-// console.log(questions.question1.correctAnswer)
-// Start quiz
-//replaceQuestion()
-  //replace main p with question
-  //remove all buttons in main
-  //select question at random
-  //for each answer in question, create button
-
-// while timer > 0
-//decrease timer every second
-
-//on button press
-//set button text to playerAnswer
-  //playerAnswer= if (playerAnswer === quesions.$[randomquesion].correctAnswer)
-   // if yes increase score
-    //if no decrease time
-  //if timer > 0
-    //replaceQuestion()
-
+console.log(currentQuestion)
+console.log (questionsArray.length)
+console.log(currentQuestion < questionsArray.length)
+timerInterval = setInterval(function () {
+  if (quizStarted) {
+    console.log(timeRemaining)
+    console.log(timeRemaining > 0) 
+    if (timeRemaining > 0 && currentQuestion < questionsArray.length) {
+      timeRemaining--;
+      timeRemainingEl.textContent = timeRemaining;
+    } else {
+      deleteButtons();
+      questionEl.textContent = "";
+      isCorrect.setAttribute("style", "display:none")
+      alert("Game Over");
+      userName = prompt("What is your name?");
+      quizStarted = false;
+    }
+  }
+}, 1000);
 //alert Game Over
 //prompt What is your name?
 //add score to Highscore list
