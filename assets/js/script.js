@@ -13,8 +13,10 @@ timeRemainingEl.textContent = timeRemaining;
 var startButtonEl = document.querySelector("#start-button");
 var buttonsEl = document.querySelector("#buttons");
 var questionEl = document.querySelector("#question");
-var isCorrect = document.querySelector("#is-correct");
-var body = document.querySelector("#test")
+var isCorrectEl = document.querySelector("#is-correct");
+var bodyEl = document.querySelector("#test");
+var gameOverEl = document.querySelector("#game-over");
+var submitScoreEl
 
 // Seeds Questions and answers for website
 const questionsArray = [
@@ -63,9 +65,11 @@ function deleteButtons() {
 
 function nextQuestion() {
   currentQuestion++;
-  assignQuestion();
-  deleteButtons();
-  createButtons();
+  if (currentQuestion < questionsArray.length) {
+    assignQuestion();
+    deleteButtons();
+    createButtons();
+  }
 }
 
 function answerIsCorrect() {
@@ -78,10 +82,10 @@ function answerIsCorrect() {
 
 function updateResult() {
   if (userAnswer === true) {
-    isCorrect.textContent = "Correct!";
+    isCorrectEl.textContent = "Correct!";
     score++;
   } else {
-    isCorrect.textContent = "Incorrect!";
+    isCorrectEl.textContent = "Incorrect!";
     timeRemaining -= 10;
     timeRemainingEl.textContent = timeRemaining;
   }
@@ -111,17 +115,8 @@ timerInterval = setInterval(function () {
       timeRemaining--;
       timeRemainingEl.textContent = timeRemaining;
     } else {
-      while (body.firstChild) {
-        body.removeChild(body.firstChild);
-      }
-      body.setAttribute("styles", "display: flex; flex-direction: column; align-items: flex-start");
-      body.innerHTML = '<h1>All Done!</h1>' +
-        '<p>Your final score is ' + score + '.</p>' +
-        '<form>' +
-        '<label for="initials">Enter initials: </label>' +
-        '<input type="text" id="initials">' +
-        '<input type="submit" value="submit" id="submit">' +
-        '</form>';
+      bodyEl.setAttribute("style", "display:none");
+      gameOverEl.setAttribute("style", "display:flex; flex-direction:column; align-items: center;");
       quizStarted = false;
     }
   }
