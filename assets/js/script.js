@@ -15,8 +15,9 @@ var buttonsEl = document.querySelector("#buttons");
 var questionEl = document.querySelector("#question");
 var isCorrectEl = document.querySelector("#is-correct");
 var bodyEl = document.querySelector("#test");
+var finalScoreEl = document.querySelector("#final-score");
 var gameOverEl = document.querySelector("#game-over");
-var submitScoreEl
+var submitScoreEl;
 
 // Seeds Questions and answers for website
 const questionsArray = [
@@ -106,6 +107,7 @@ buttonsEl.addEventListener("click", function (event) {
   userAnswer = event.target.textContent
   answerIsCorrect();
   updateResult();
+  console.log(score)
   nextQuestion();
 });
 
@@ -115,6 +117,7 @@ timerInterval = setInterval(function () {
       timeRemaining--;
       timeRemainingEl.textContent = timeRemaining;
     } else {
+      finalScoreEl.textContent = score;
       bodyEl.setAttribute("style", "display:none");
       gameOverEl.setAttribute("style", "display:flex; flex-direction:column; align-items: center;");
       quizStarted = false;

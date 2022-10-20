@@ -21,8 +21,8 @@ section p {
   margin-bottom: .5rem;
 }
 
-main button,
-#submit {
+button, 
+#submit-score {
   margin: 1rem;
   background-color: blueviolet;
   color: white;
