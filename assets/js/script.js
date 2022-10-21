@@ -142,4 +142,5 @@ submitScoreEl.addEventListener("click", function (event) {
   };
   highScore.push(score)
   localStorage.setItem("highScore", JSON.stringify(highScore));
+  window.location.replace("./highscore.html")
 });
