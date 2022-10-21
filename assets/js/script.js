@@ -4,7 +4,12 @@ var currentQuestion = 0;
 var userAnswer = "";
 var quizStarted = false;
 var score = 0;
-var userName = "";
+var userInitials = "";
+var highScore = [];
+if (JSON.parse(localStorage.getItem("highScore")) !== null) {
+  highScore = JSON.parse(localStorage.getItem("highScore"));
+}
+console.log(highScore);
 
 // UI Hooks
 var timeRemainingEl = document.querySelector("#time-remaining");
@@ -17,7 +22,8 @@ var isCorrectEl = document.querySelector("#is-correct");
 var bodyEl = document.querySelector("#test");
 var finalScoreEl = document.querySelector("#final-score");
 var gameOverEl = document.querySelector("#game-over");
-var submitScoreEl;
+var submitScoreEl = document.querySelector("#submit-score");
+var initialsEl = document.querySelector("#initials");
 
 // Seeds Questions and answers for website
 const questionsArray = [
@@ -125,4 +131,15 @@ timerInterval = setInterval(function () {
   }
 }, 1000);
 
-//add score to Highscore list
+submitScoreEl.addEventListener("click", function (event) {
+  event.preventDefault();
+  userInitials = initialsEl.value;
+  score =
+  {
+    userInitials: userInitials,
+    score: score,
+    timeRemaining: timeRemaining
+  };
+  highScore.push(score)
+  localStorage.setItem("highScore", JSON.stringify(highScore));
+});
