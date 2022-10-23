@@ -21,6 +21,7 @@ li {
   flex-grow: 1;
   margin-left: 18px;
   margin-right: auto;
+  padding-left: .5rem;
   background-color: pink;
   width: 100%;
 

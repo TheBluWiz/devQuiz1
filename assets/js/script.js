@@ -128,7 +128,11 @@ function updateResult() {
   } else {
     isCorrectEl.textContent = "Incorrect!";
     timeRemaining -= 10;
-    timeRemainingEl.textContent = timeRemaining;
+    if (timeRemaining > -1) {
+      timeRemainingEl.textContent = timeRemaining;
+    } else {
+      timeRemainingEl.textContent = 0;
+    }
   }
 }
 
