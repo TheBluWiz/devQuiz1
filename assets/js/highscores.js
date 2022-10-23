@@ -1,12 +1,10 @@
 var highScoreEl = document.querySelector("#high-scores");
 var buttonsEl = document.querySelector("#buttons");
-console.log(buttonsEl)
 
 var highScore = [];
 if (JSON.parse(localStorage.getItem("highScore")) !== null) {
   highScore = JSON.parse(localStorage.getItem("highScore"));
 };
-console.log(highScore)
 
 for (let i = 0; i < highScore.length; i++) {
   let j = i + 1

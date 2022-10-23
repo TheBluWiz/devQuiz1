@@ -1,3 +1,15 @@
+// UI Hooks
+var timeRemainingEl = document.querySelector("#time-remaining");
+var startButtonEl = document.querySelector("#start-button");
+var buttonsEl = document.querySelector("#buttons");
+var questionEl = document.querySelector("#question");
+var isCorrectEl = document.querySelector("#is-correct");
+var bodyEl = document.querySelector("#test");
+var finalScoreEl = document.querySelector("#final-score");
+var gameOverEl = document.querySelector("#game-over");
+var submitScoreEl = document.querySelector("#submit-score");
+var initialsEl = document.querySelector("#initials");
+
 // State Variables
 var timeRemaining = 0;
 var currentQuestion = 0;
@@ -9,21 +21,9 @@ var highScore = [];
 if (JSON.parse(localStorage.getItem("highScore")) !== null) {
   highScore = JSON.parse(localStorage.getItem("highScore"));
 }
-console.log(highScore);
 
-// UI Hooks
-var timeRemainingEl = document.querySelector("#time-remaining");
+// Set UI
 timeRemainingEl.textContent = timeRemaining;
-
-var startButtonEl = document.querySelector("#start-button");
-var buttonsEl = document.querySelector("#buttons");
-var questionEl = document.querySelector("#question");
-var isCorrectEl = document.querySelector("#is-correct");
-var bodyEl = document.querySelector("#test");
-var finalScoreEl = document.querySelector("#final-score");
-var gameOverEl = document.querySelector("#game-over");
-var submitScoreEl = document.querySelector("#submit-score");
-var initialsEl = document.querySelector("#initials");
 
 // Seeds Questions and answers for website
 const questionsArray = [
@@ -161,8 +161,21 @@ buttonsEl.addEventListener("click", function (event) {
   userAnswer = event.target.textContent
   answerIsCorrect();
   updateResult();
-  console.log(score)
   nextQuestion();
+});
+
+submitScoreEl.addEventListener("click", function (event) {
+  event.preventDefault();
+  userInitials = initialsEl.value;
+  score =
+  {
+    userInitials: userInitials,
+    score: score,
+    timeRemaining: timeRemaining
+  };
+  highScore.push(score)
+  localStorage.setItem("highScore", JSON.stringify(highScore));
+  window.location.replace("./highscore.html")
 });
 
 timerInterval = setInterval(function () {
@@ -178,17 +191,3 @@ timerInterval = setInterval(function () {
     }
   }
 }, 1000);
-
-submitScoreEl.addEventListener("click", function (event) {
-  event.preventDefault();
-  userInitials = initialsEl.value;
-  score =
-  {
-    userInitials: userInitials,
-    score: score,
-    timeRemaining: timeRemaining
-  };
-  highScore.push(score)
-  localStorage.setItem("highScore", JSON.stringify(highScore));
-  window.location.replace("./highscore.html")
-});
