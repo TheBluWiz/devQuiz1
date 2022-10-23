@@ -42,6 +42,40 @@ const questionsArray = [
     answers: ["numbers and strings", "other arrays", "booleans", "all of these"],
     correctAnswer: "all of these"
   },
+  {
+    question: "String values must be enclosed within _____ when being assigned to variables.",
+    answers: ["commas", "curly brackets", "quotes", "parentheses"],
+    correctAnswer: "quotes"
+  },
+  {
+    question: "A very useful tool used during development and debugging for printing content to the debuggger is:",
+    answers: ["JavaScript", "terminal/bash", "for loops", "console.log"],
+    correctAnswer: "console.log"
+  },
+  {
+    question: "Which of the following is a version control system?",
+    answers: ["rsync", "Git Bash", "stack overflow", "git"],
+    correctAnswer: "git"
+  },
+  {
+    question: "What commonly used file prevents unwanted code from being included in your repo?",
+    answers: [".gitignore", "git.ignore", ".gitIgnore", ".ignoregit"],
+    correctAnswer: ".gitignore"
+  },
+  {
+    question: "Which file is the first resource pulled when accessing a website?",
+    answers: ["root.html", "styles.css", "html.index", "index.html"],
+    correctAnswer: "index.html"
+  },
+  {
+    question: "Which of the following tools helps make websites responsive?",
+    answers: ["transform", "@media", "font-weight", "<div>"],
+    correctAnswer: "@media"
+  },
+  {
+    question: "How do you add an image to a README.md file?",
+    answers: ['<img src="./file/path>"', '<link href="./file/path"', "![site image](./file/path)", '"!<img>(./file/path"']
+  }
 ]
 
 // Fischer-Yates shuffle sourced at:

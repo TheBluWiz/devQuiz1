@@ -12,14 +12,18 @@ main {
 }
 
 ul {
-  position: relative
+  display: flexbox;
+  flex-direction: column;
+  width: 100%;
 }
-ul,
+
 li {
+  flex-grow: 1;
   margin-left: 18px;
   margin-right: auto;
   background-color: pink;
   width: 100%;
+
 }
 
 #buttons {
