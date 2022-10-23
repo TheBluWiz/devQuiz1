@@ -80,9 +80,18 @@ const questionsArray = [
 
 // Fischer-Yates shuffle sourced at:
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// Sort array questions
 for (let i = questionsArray.length - 1; i > 0; i--) {
   var j = Math.floor(Math.random() * (i + 1));
   [questionsArray[i], questionsArray[j]] = [questionsArray[j], questionsArray[i]];
+}
+
+// Sort Answers
+function sortAnswers () {
+  for (let i = questionsArray[currentQuestion].answers.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    [questionsArray[currentQuestion].answers[i], questionsArray[currentQuestion].answers[j]] = [questionsArray[currentQuestion].answers[j], questionsArray[currentQuestion].answers[i]];
+  }
 }
 
 // sets UI to current question
@@ -91,6 +100,7 @@ function assignQuestion() {
 }
 
 function createButtons() {
+  sortAnswers();
   for (let i = 0; i < questionsArray[currentQuestion].answers.length; i++) {
     var buttonArray = document.createElement("button");
     buttonArray.textContent = questionsArray[currentQuestion].answers[i]
