@@ -74,7 +74,8 @@ const questionsArray = [
   },
   {
     question: "How do you add an image to a README.md file?",
-    answers: ['<img src="./file/path>"', '<link href="./file/path"', "![site image](./file/path)", '"!<img>(./file/path"']
+    answers: ['<img src="./file/path>"', '<link href="./file/path"', "![site image](./file/path)", '"!<img>(./file/path"'],
+    correctAnswer: "![site image](./file/path)"
   }
 ]
 
