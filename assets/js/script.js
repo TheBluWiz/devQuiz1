@@ -21,6 +21,7 @@ var highScore = [];
 if (JSON.parse(localStorage.getItem("highScore")) !== null) {
   highScore = JSON.parse(localStorage.getItem("highScore"));
 }
+console.log(highScore)
 
 // Set UI
 timeRemainingEl.textContent = timeRemaining;
@@ -88,7 +89,7 @@ for (let i = questionsArray.length - 1; i > 0; i--) {
 }
 
 // Sort Answers
-function sortAnswers () {
+function sortAnswers() {
   for (let i = questionsArray[currentQuestion].answers.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     [questionsArray[currentQuestion].answers[i], questionsArray[currentQuestion].answers[j]] = [questionsArray[currentQuestion].answers[j], questionsArray[currentQuestion].answers[i]];
@@ -174,7 +175,8 @@ submitScoreEl.addEventListener("click", function (event) {
     score: score,
     timeRemaining: timeRemaining
   };
-  highScore.push(score)
+  highScore.push(score);
+  highScore.sort(function(a, b){return b.score - a.score});
   localStorage.setItem("highScore", JSON.stringify(highScore));
   window.location.replace("./highscore.html")
 });
