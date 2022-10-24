@@ -21,7 +21,6 @@ var highScore = [];
 if (JSON.parse(localStorage.getItem("highScore")) !== null) {
   highScore = JSON.parse(localStorage.getItem("highScore"));
 }
-console.log(highScore)
 
 // Set UI
 timeRemainingEl.textContent = timeRemaining;
@@ -80,8 +79,6 @@ const questionsArray = [
   }
 ]
 
-// Fischer-Yates shuffle sourced at:
-// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 // Sort array questions
 for (let i = questionsArray.length - 1; i > 0; i--) {
   var j = Math.floor(Math.random() * (i + 1));
@@ -101,6 +98,7 @@ function assignQuestion() {
   questionEl.textContent = questionsArray[currentQuestion].question;
 }
 
+// creates buttons for each answer in a given question
 function createButtons() {
   sortAnswers();
   for (let i = 0; i < questionsArray[currentQuestion].answers.length; i++) {
@@ -110,12 +108,14 @@ function createButtons() {
   }
 }
 
+// deletes all buttons
 function deleteButtons() {
   while (buttonsEl.firstChild) {
     buttonsEl.removeChild(buttonsEl.firstChild);
   }
 }
 
+// selects next question and updates the UI
 function nextQuestion() {
   currentQuestion++;
   if (currentQuestion < questionsArray.length) {
@@ -125,6 +125,7 @@ function nextQuestion() {
   }
 }
 
+// checks to see if question was answered correctly
 function answerIsCorrect() {
   if (userAnswer === questionsArray[currentQuestion].correctAnswer) {
     userAnswer = true;
@@ -133,6 +134,7 @@ function answerIsCorrect() {
   }
 }
 
+// updates scoring and time based on user answer
 function updateResult() {
   if (userAnswer === true) {
     isCorrectEl.textContent = "Correct!";
@@ -148,6 +150,7 @@ function updateResult() {
   }
 }
 
+// starts game if start button clicked
 startButtonEl.addEventListener("click", function () {
   startButtonEl.setAttribute("style", "display:none");
   assignQuestion();
@@ -158,6 +161,7 @@ startButtonEl.addEventListener("click", function () {
   quizStarted = true;
 });
 
+// progresses game after user chooses an answer
 buttonsEl.addEventListener("click", function (event) {
   event.stopPropagation();
   userAnswer = event.target.textContent
@@ -166,6 +170,7 @@ buttonsEl.addEventListener("click", function (event) {
   nextQuestion();
 });
 
+// updates high score list
 submitScoreEl.addEventListener("click", function (event) {
   event.preventDefault();
   userInitials = initialsEl.value;
@@ -181,6 +186,7 @@ submitScoreEl.addEventListener("click", function (event) {
   window.location.replace("./highscore.html")
 });
 
+// keeps time during quiz
 timerInterval = setInterval(function () {
   if (quizStarted) {
     if (timeRemaining > 0 && currentQuestion < questionsArray.length) {
