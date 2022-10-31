@@ -195,7 +195,7 @@ timerInterval = setInterval(function () {
     } else {
       finalScoreEl.textContent = score;
       bodyEl.setAttribute("style", "display:none");
-      gameOverEl.setAttribute("style", "display:flex; flex-direction:column; align-items: center;");
+      gameOverEl.setAttribute("style", "display:flex;flex-direction:column; align-items: center;");
       quizStarted = false;
     }
   }
